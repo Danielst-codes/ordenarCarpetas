@@ -1,0 +1,96 @@
+import os
+import shutil
+
+
+#Creamos una funcion que se encarga de leer todas las carpetas y archivos
+def listar_contenido(path: str):
+   lista = []
+   for nombre_archivo in os.listdir(path):
+       paht_absoluto = os.path.join(path,nombre_archivo )
+       lista.append(paht_absoluto)
+   return lista
+
+
+
+
+#funcion para separar carpetas y archivos 
+def es_carpeta_o_archivo(lista: list):
+    lista_archivos = []
+    lista_carpetas = []
+    for i in lista:
+        if os.path.isfile(i):
+            lista_archivos.append(i)
+        elif os.path.isdir(i):
+            lista_carpetas.append(i)
+    organizacion = (lista_carpetas, lista_archivos)
+    return organizacion 
+
+
+
+
+#funcion para clasiicar archivo 
+def clasificar_archivo(lista_archivos):
+    for i in lista_archivos:
+       ruta_base = os.path.dirname(i)
+       raiz, extension = os.path.splitext(i)
+       extension_sin_punto = extension.lstrip('.')
+       if existe_carpeta(extension_sin_punto, ruta_base):
+           ruta_archivo = os.path.join(ruta_base, extension_sin_punto)
+           mover_Archivo(i,ruta_archivo)
+       else:
+           rua_nueva_carpeta = crear_carpeta(extension_sin_punto, ruta_base) 
+           mover_Archivo(i,rua_nueva_carpeta)
+
+
+
+#funcion para crear carpeta
+def crear_carpeta(extension:str, ruta_base:str):
+    ruta_de_carpeta = os.path.join(ruta_base,extension)
+    os.mkdir(ruta_de_carpeta)
+    return ruta_de_carpeta
+
+
+
+#compraobar si existe 
+def existe_carpeta(extension:str, ruta_base):
+    extension_sin_punto = extension.lstrip('.')
+    ruta = os.path.join(ruta_base, extension_sin_punto)
+    return os.path.exists(ruta)
+
+
+#funcion para mover el archivo 
+def mover_Archivo(ruta_inicio:str, ruta_destino:str):
+    shutil.move(ruta_inicio, ruta_destino)
+
+
+#Procesar carpetas
+def procesar_carpeta(ruta):
+    contenido = listar_contenido(ruta)
+
+    lista_carpetas, lista_archivos = es_carpeta_o_archivo(contenido)
+  
+    clasificar_archivo(lista_archivos)
+    
+    for carpeta in lista_carpetas:
+        procesar_carpeta(carpeta)
+
+
+#main
+def main():
+    ruta = input("Introduzca la ruta que desea organizar: ")
+    
+    # Comprobamos que la ruta exista
+    if not os.path.exists(ruta):
+        print("La ruta no existe.")
+        return
+
+    procesar_carpeta(ruta)
+    
+    print("Organización completada.")
+
+
+
+
+    
+
+    
