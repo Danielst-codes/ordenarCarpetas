@@ -36,7 +36,7 @@ Recursividad — para recorrer subdirectorios
 
 Clona el repositorio o descarga el archivo:
 
-git clone https://github.com/tuusuario/organizador-carpetas.git
+git clone [https://github.com/tuusuario/organizador-carpetas.git](https://github.com/Danielst-codes/ordenarCarpetas)
 
 
 Entra en la carpeta del proyecto:
@@ -54,7 +54,7 @@ python --version
 
 Ejecuta el programa desde la terminal:
 
-python organizador.py
+python ordenarCarpetas.py
 
 
 Cuando lo pida, introduce la ruta que deseas organizar:
