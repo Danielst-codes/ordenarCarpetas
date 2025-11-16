@@ -5,6 +5,7 @@ El programa analiza una ruta proporcionada por el usuario y clasifica los archiv
 
 Además, recorre todas las subcarpetas de forma recursiva para organizar todo el contenido del árbol de directorios.
 
+
 🚀 Características
 
 Clasifica archivos según su extensión.
@@ -18,6 +19,7 @@ Recorre todas las subcarpetas (recursivo).
 Automatiza una tarea común de organización de archivos.
 
 Funciona en Windows, Linux y macOS.
+
 
 
 🛠️ Tecnologías utilizadas
